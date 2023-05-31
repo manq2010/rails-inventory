@@ -4,6 +4,20 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "3.0.2"
 
 gem 'devise'
+gem "chartkick", "~> 4.2"
+gem "sassc-rails", "~> 2.1"
+gem "tailwindcss-rails", "~> 2.0"
+gem "sidekiq", "< 8"
+gem "sidekiq-cron", "~> 1.9"
+gem "http", "~> 5.0"
+gem "jwt", "~> 2.3"
+gem "flipper", "~> 0.23.0"
+gem "flipper-ui", "~> 0.23.0"
+gem "flipper-active_record", "~> 0.23.0"
+gem "dotenv-rails", "~> 2.7"
+gem "rack-cors", "~> 1.1", require: "rack/cors"
+gem "google-apis-androidpublisher_v3", "~> 0.16.0"
+gem "googleauth", "~> 1.1"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.4", ">= 7.0.4.3"

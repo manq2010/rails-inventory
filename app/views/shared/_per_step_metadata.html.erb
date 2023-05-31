@@ -1,0 +1,46 @@
+<div>
+  <div class="px-4 py-2 bg-<%= step_color step.kind %>-50 rounded-md border-2 border-<%= step_color step.kind %>-300">
+    <div class="flex justify-between">
+      <div class="flex flex-row items-center w-full">
+        <h3 class="text-lg font-bold text-slate-800"><%= step.name %></h3>
+        <%= status_badge "##{step.step_number}", %w[text-xs ml-2], :neutral %>
+        <%= status_badge step.kind&.humanize, %w[text-xs ml-2], :neutral %>
+      </div>
+
+      <% if editable %>
+        <%= render partial: "trains/edit_step_button", locals: { editable: editable, step: step } %>
+      <% end %>
+
+      <% if release.present? %>
+        <%= render partial: "releases/live_release/step_run_status", locals: { step_run: step_run, step: step } %>
+      <% end %>
+    </div>
+
+    <div class="flex flex-col gap-y-5 mb-6">
+      <div class="flex flex-row items-center w-full">
+        <div class="text-slate-500 text-sm"><%= simple_format(step.description) %></div>
+      </div>
+
+      <% if step_run&.build_version %>
+        <div class="flex flex-col w-full">
+          <%= render partial: "shared/build_details", locals: { step_run:, with_artifact: false } %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="flex flex-col gap-y-2">
+      <div class="flex flex-row items-center gap-x-2 w-full">
+        <%= inline_svg("workflow.svg", classname: "w-4 inline-flex mr-1") %>
+        <%= render partial: "shared/display_channels",
+                   locals: { name: show_ci_cd(step),
+                             provider_name: step.train.ci_cd_provider.to_s } %>
+      </div>
+
+      <div class="flex flex-row items-center w-full">
+        <div class="inline-flex mr-1"></div>
+        <%= render partial: "shared/deployments",
+                   locals: { step: step, step_run: step_run, release: release, show_deployment_status: release.present? } %>
+      </div>
+    </div>
+  </div>
+</div>
