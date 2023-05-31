@@ -1,0 +1,62 @@
+require:
+  - standard
+  - rubocop-rails
+  - rubocop-rspec
+  - rubocop-performance
+
+inherit_gem:
+  standard: config/ruby-3.0.yml
+
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  TargetRubyVersion: 3.1
+  NewCops: enable
+  Exclude:
+    - .irbrc
+    - bin/**/*
+    - bundle/**/*
+    - public/**/*
+    - vendor/**/*
+    - tmp/**/*
+    - db/schema.rb
+    - db/migrate/2022*
+
+Rails:
+  Enabled: true
+
+Rails/SkipsModelValidations:
+  Exclude:
+    - db/**/*
+    - app/refinements/refined_string.rb
+    - app/models/releases/pull_request.rb # intentional use of upsert
+
+Rails/TransactionExitStatement:
+  Enabled: false # intentional use of return inside transactions
+
+Rails/ReversibleMigration:
+  Enabled: false # use strong_migrations instead
+
+Rails/UniqBeforePluck:
+  Enabled: false # https://github.com/rubocop/rubocop/issues/3148
+
+RSpec:
+  Enabled: true
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/AnyInstance:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Max: 4
+
+RSpec/MultipleMemoizedHelpers:
+  Max: 10
+
+RSpec/MessageChain:
+  Enabled: false
+
+Performance:
+  Enabled: true
