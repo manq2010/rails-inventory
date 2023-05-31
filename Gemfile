@@ -16,7 +16,7 @@ gem "flipper-ui", "~> 0.23.0"
 gem "flipper-active_record", "~> 0.23.0"
 gem "dotenv-rails", "~> 2.7"
 gem "rack-cors", "~> 1.1", require: "rack/cors"
-gem "google-apis-androidpublisher_v3", "~> 0.16.0"
+# gem "google-apis-androidpublisher_v3", "~> 0.16.0"
 gem "googleauth", "~> 1.1"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
