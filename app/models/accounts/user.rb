@@ -33,21 +33,21 @@ class Accounts::User < ApplicationRecord
   has_paper_trail
 
   devise :database_authenticatable, :registerable, :trackable, :lockable,
-    :recoverable, :confirmable, :timeoutable, :rememberable, :validatable
+         :recoverable, :confirmable, :timeoutable, :rememberable, :validatable
 
-  validates :password, password_strength: {use_dictionary: true}, allow_nil: true
+  validates :password, password_strength: { use_dictionary: true }, allow_nil: true
   validates :email, presence: true,
-    uniqueness: {case_sensitive: false},
-    length: {maximum: 105},
-    format: {with: URI::MailTo::EMAIL_REGEXP}
+                    uniqueness: { case_sensitive: false },
+                    length: { maximum: 105 },
+                    format: { with: URI::MailTo::EMAIL_REGEXP }
 
   after_validation :strip_unnecessary_errors
 
   has_many :memberships, dependent: :delete_all, inverse_of: :user
   has_many :organizations, -> { where(status: :active) }, through: :memberships
   has_many :all_organizations, through: :memberships, source: :organization
-  has_many :sent_invites, class_name: "Invite", foreign_key: "sender_id", inverse_of: :sender, dependent: :destroy
-  has_many :invitations, class_name: "Invite", foreign_key: "recipient_id", inverse_of: :recipient, dependent: :destroy
+  has_many :sent_invites, class_name: 'Invite', foreign_key: 'sender_id', inverse_of: :sender, dependent: :destroy
+  has_many :invitations, class_name: 'Invite', foreign_key: 'recipient_id', inverse_of: :recipient, dependent: :destroy
 
   friendly_id :full_name, use: :slugged
 
@@ -57,7 +57,7 @@ class Accounts::User < ApplicationRecord
 
   def self.onboard(user)
     if find_by(email: user.email)
-      user.errors.add(:account_exists, "you already have an account with tramline!")
+      user.errors.add(:account_exists, 'you already have an account with tramline!')
       return user
     end
 
@@ -103,9 +103,9 @@ class Accounts::User < ApplicationRecord
   # We only want to display one error message to the user, so if we get multiple
   # exceptions clear out all exceptions and present our nice message to the user.
   def strip_unnecessary_errors
-    if errors[:password].any? && errors[:password].size > 1
-      errors.delete(:password)
-      errors.add(:password, I18n.t("errors.messages.password.password_strength"))
-    end
+    return unless errors[:password].any? && errors[:password].size > 1
+
+    errors.delete(:password)
+    errors.add(:password, I18n.t('errors.messages.password.password_strength'))
   end
 end

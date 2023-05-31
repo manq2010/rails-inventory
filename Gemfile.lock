@@ -68,7 +68,10 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.4)
       public_suffix (>= 2.0.2, < 6.0)
+    amazing_print (1.5.0)
     ast (2.4.2)
+    auto_strip_attributes (2.6.0)
+      activerecord (>= 4.0)
     bcrypt (3.1.18)
     bindex (0.8.1)
     bootsnap (1.16.0)
@@ -91,6 +94,7 @@ GEM
     debug (1.8.0)
       irb (>= 1.5.0)
       reline (>= 0.3.1)
+    device_detector (1.1.0)
     devise (4.9.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -98,12 +102,15 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.5.0)
+    dogstatsd-ruby (5.5.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     dotenv (2.8.1)
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
       railties (>= 3.2)
+    easymon (1.6.2)
+      redis
     erubi (1.12.0)
     et-orbi (1.2.7)
       tzinfo
@@ -111,6 +118,7 @@ GEM
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
     faraday-net_http (3.0.2)
+    fast_blank (1.0.1)
     ffi (1.15.5)
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
@@ -125,9 +133,13 @@ GEM
       rack (>= 1.4, < 3)
       rack-protection (>= 1.5.3, < 2.2.0)
       sanitize (< 7)
+    friendly_id (5.5.0)
+      activerecord (>= 4.0.0)
     fugit (1.8.1)
       et-orbi (~> 1, >= 1.2.7)
       raabro (~> 1.4)
+    github-ds (0.5.2)
+      activerecord (>= 3.2)
     globalid (1.1.0)
       activesupport (>= 5.0)
     googleauth (1.5.2)
@@ -150,6 +162,11 @@ GEM
     importmap-rails (1.1.6)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
+    inline_svg (1.9.0)
+      activesupport (>= 3.0)
+      nokogiri (>= 1.6)
+    intercom-rails (0.4.2)
+      activesupport (> 3.0)
     io-console (0.6.0)
     irb (1.6.4)
       reline (>= 0.3.0)
@@ -171,6 +188,8 @@ GEM
       net-smtp
     marcel (1.0.2)
     matrix (0.4.2)
+    memery (1.4.1)
+      ruby2_keywords (~> 0.0.2)
     memoist (0.16.2)
     method_source (1.0.0)
     mini_mime (1.1.2)
@@ -189,8 +208,15 @@ GEM
     nio4r (2.5.9)
     nokogiri (1.15.1-x86_64-linux)
       racc (~> 1.4)
+    oj (3.14.3)
     orm_adapter (0.5.0)
     os (1.1.4)
+    ougai (2.0.0)
+      oj (~> 3.10)
+    pagy (6.0.4)
+    paper_trail (12.3.0)
+      activerecord (>= 5.2)
+      request_store (~> 1.1)
     parallel (1.23.0)
     parser (3.2.2.1)
       ast (~> 2.4.1)
@@ -239,6 +265,8 @@ GEM
     regexp_parser (2.8.0)
     reline (0.3.4)
       io-console (~> 0.5)
+    request_store (1.5.1)
+      rack (>= 1.4)
     responders (3.1.0)
       actionpack (>= 5.2)
       railties (>= 5.2)
@@ -295,6 +323,7 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    semantic (1.6.1)
     sidekiq (6.5.8)
       connection_pool (>= 2.2.5, < 3)
       rack (~> 2.0)
@@ -317,6 +346,9 @@ GEM
       sprockets (>= 3.0.0)
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
+    strong_migrations (1.4.4)
+      activerecord (>= 5.2)
+    strong_password (0.0.10)
     tailwindcss-rails (2.0.29-x86_64-linux)
       railties (>= 6.0.0)
     thor (1.2.2)
@@ -332,6 +364,10 @@ GEM
       unf_ext
     unf_ext (0.0.8.2)
     unicode-display_width (2.4.2)
+    view_component (2.82.0)
+      activesupport (>= 5.2.0, < 8.0)
+      concurrent-ruby (~> 1.0)
+      method_source (~> 1.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.0)
@@ -355,20 +391,35 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  amazing_print (~> 1.4)
+  auto_strip_attributes (~> 2.6)
   bootsnap
   capybara
   chartkick (~> 4.2)
   debug
+  device_detector (~> 1.0)
   devise
+  dogstatsd-ruby (~> 5.5)
   dotenv-rails (~> 2.7)
+  easymon (~> 1.6)
+  fast_blank (~> 1.0)
   flipper (~> 0.23.0)
   flipper-active_record (~> 0.23.0)
   flipper-ui (~> 0.23.0)
+  friendly_id (~> 5.4)
+  github-ds (~> 0.5.2)
   googleauth (~> 1.1)
   http (~> 5.0)
   importmap-rails
+  inline_svg
+  intercom-rails (~> 0.4.2)
   jbuilder
   jwt (~> 2.3)
+  memery (~> 1.4)
+  oj (~> 3.13)
+  ougai (~> 2.0)
+  pagy (~> 6.0)
+  paper_trail (~> 12.2)
   pg (~> 1.1)
   puma (~> 5.0)
   rack-cors (~> 1.1)
@@ -377,13 +428,17 @@ DEPENDENCIES
   rubocop-rspec
   sassc-rails (~> 2.1)
   selenium-webdriver
+  semantic (~> 1.6)
   sidekiq (< 8)
   sidekiq-cron (~> 1.9)
   sprockets-rails
   stimulus-rails
+  strong_migrations (~> 1.4)
+  strong_password (~> 0.0.10)
   tailwindcss-rails (~> 2.0)
   turbo-rails
   tzinfo-data
+  view_component (~> 2.82)
   web-console
   webdrivers
 

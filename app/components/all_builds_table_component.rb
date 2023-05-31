@@ -23,7 +23,7 @@ class AllBuildsTableComponent < ViewComponent::Base
         concat sort_indicator
       end
     else
-      link_to(path(column, "asc"), data: turbo_data) do
+      link_to(path(column, 'asc'), data: turbo_data) do
         concat tag.span(label)
         concat sort_indicator
       end
@@ -31,7 +31,7 @@ class AllBuildsTableComponent < ViewComponent::Base
   end
 
   def sort_indicator
-    image_tag("sort_indicator.svg", class: "inline-flex mx-2 align-baseline", width: 8)
+    image_tag('sort_indicator.svg', class: 'inline-flex mx-2 align-baseline', width: 8)
   end
 
   def release_status(build)
@@ -57,7 +57,7 @@ class AllBuildsTableComponent < ViewComponent::Base
   private
 
   def next_direction
-    (@sort_direction == "asc") ? "desc" : "asc"
+    @sort_direction == 'asc' ? 'desc' : 'asc'
   end
 
   def path(column, direction)
@@ -65,6 +65,6 @@ class AllBuildsTableComponent < ViewComponent::Base
   end
 
   def turbo_data
-    {turbo_frame: "all_builds"}
+    { turbo_frame: 'all_builds' }
   end
 end

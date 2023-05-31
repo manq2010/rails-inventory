@@ -13,13 +13,14 @@ class ExternalAppComponent < ViewComponent::Base
   private
 
   def column_names
-    ["Channel Name", "Current Releases"]
+    ['Channel Name', 'Current Releases']
   end
 
   def subtitle
     return "Last changed #{ago_in_words external_app.fetched_at}" if external_app
-    return "Fetching..." if app.has_store_integration?
-    "Add store deployment integration to fetch this information"
+    return 'Fetching...' if app.has_store_integration?
+
+    'Add store deployment integration to fetch this information'
   end
 
   def channels

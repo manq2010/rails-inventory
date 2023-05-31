@@ -1,62 +1,60 @@
-require:
-  - standard
-  - rubocop-rails
-  - rubocop-rspec
-  - rubocop-performance
-
-inherit_gem:
-  standard: config/ruby-3.0.yml
-
-inherit_from: .rubocop_todo.yml
-
 AllCops:
-  TargetRubyVersion: 3.1
   NewCops: enable
   Exclude:
-    - .irbrc
-    - bin/**/*
-    - bundle/**/*
-    - public/**/*
-    - vendor/**/*
-    - tmp/**/*
-    - db/schema.rb
-    - db/migrate/2022*
+    - "db/**/*"
+    - "bin/*" 
+    - "config/**/*"
+    - "Guardfile"
+    - "Rakefile"
+    - "node_modules/**/*"
 
-Rails:
-  Enabled: true
+  DisplayCopNames: true
 
-Rails/SkipsModelValidations:
-  Exclude:
-    - db/**/*
-    - app/refinements/refined_string.rb
-    - app/models/releases/pull_request.rb # intentional use of upsert
+Layout/LineLength:
+  Max: 120
+Metrics/MethodLength:
+  Include:
+    - "app/controllers/*"
+    - "app/models/*"
+  Max: 20
+Metrics/AbcSize:
+  Include:
+    - "app/controllers/*"
+    - "app/models/*"
+  Max: 50
+Metrics/ClassLength:
+  Max: 150
+Metrics/BlockLength:
+  IgnoredMethods: ['describe']
+  Max: 30
 
-Rails/TransactionExitStatement:
-  Enabled: false # intentional use of return inside transactions
-
-Rails/ReversibleMigration:
-  Enabled: false # use strong_migrations instead
-
-Rails/UniqBeforePluck:
-  Enabled: false # https://github.com/rubocop/rubocop/issues/3148
-
-RSpec:
-  Enabled: true
-
-RSpec/ExampleLength:
+Style/Documentation:
   Enabled: false
-
-RSpec/AnyInstance:
+Style/ClassAndModuleChildren:
   Enabled: false
-
-RSpec/MultipleExpectations:
-  Max: 4
-
-RSpec/MultipleMemoizedHelpers:
-  Max: 10
-
-RSpec/MessageChain:
+Style/EachForSimpleLoop:
   Enabled: false
+Style/AndOr:
+  Enabled: false
+Style/DefWithParentheses:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: never
 
-Performance:
+Layout/HashAlignment:
+  EnforcedColonStyle: key
+Layout/ExtraSpacing:
+  AllowForAlignment: false
+Layout/MultilineMethodCallIndentation:
   Enabled: true
+  EnforcedStyle: indented
+Lint/RaiseException:
+  Enabled: false
+Lint/StructNewOverride:
+  Enabled: false
+Style/HashEachMethods:
+  Enabled: false
+Style/HashTransformKeys:
+  Enabled: false
+Style/HashTransformValues:
+  Enabled: false

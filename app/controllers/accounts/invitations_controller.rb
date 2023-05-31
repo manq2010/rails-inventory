@@ -17,12 +17,12 @@ class Accounts::InvitationsController < SignedInApplicationController
           InvitationMailer.new_user(@invite).deliver
         end
       rescue Postmark::ApiInputError
-        flash[:error] = "Sorry, there was a delivery error while sending the invite!"
+        flash[:error] = 'Sorry, there was a delivery error while sending the invite!'
         render :new, status: :unprocessable_entity
       end
 
       redirect_to accounts_organization_team_path(current_organization),
-        notice: "Sent an invite to #{@invite.email}!"
+                  notice: "Sent an invite to #{@invite.email}!"
     else
       render :new, status: :unprocessable_entity
     end

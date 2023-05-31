@@ -3,13 +3,13 @@ Rails.application.routes.draw do
   require "sidekiq/cron/web"
 
   mount ActionCable.server => "/cable"
-  mount Easymon::Engine => "/up"
+  # mount Easymon::Engine => "/up"
 
   authenticate :user, ->(u) { u.admin? || Rails.env.development? } do
-    mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+    # mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
     mount Flipper::UI.app(Flipper), at: "/flipper"
     mount Sidekiq::Web, at: "/sidekiq"
-    mount PgHero::Engine, at: "/pghero"
+    # mount PgHero::Engine, at: "/pghero"
   end
 
   devise_for :users,

@@ -1,8 +1,8 @@
 class Authentication::RegistrationsController < Devise::RegistrationsController
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :set_invite_token, only: [:new, :create]
-  before_action :set_invite, only: [:new, :create]
-  alias_method :user, :resource
+  before_action :set_invite_token, only: %i[new create]
+  before_action :set_invite, only: %i[new create]
+  alias user resource
   helper_method :user
 
   def new
@@ -18,7 +18,7 @@ class Authentication::RegistrationsController < Devise::RegistrationsController
 
       if sign_up_email != @invite.email
         flash.clear
-        flash[:notice] = t("invitation.flash.invite_error.email")
+        flash[:notice] = t('invitation.flash.invite_error.email')
         render :new, status: :unprocessable_entity and return
       end
 

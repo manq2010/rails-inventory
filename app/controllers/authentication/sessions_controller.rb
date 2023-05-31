@@ -2,14 +2,6 @@ class Authentication::SessionsController < Devise::SessionsController
   after_action :prepare_intercom_shutdown, only: [:destroy]
   after_action :intercom_shutdown, only: [:new]
 
-  def new
-    super
-  end
-
-  def destroy
-    super
-  end
-
   protected
 
   def prepare_intercom_shutdown
